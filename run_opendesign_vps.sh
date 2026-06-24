@@ -84,6 +84,18 @@ EOF
 # ---------------------------------------------------------
 echo -e "\n\e[33m[3/5] Build production web app...\e[0m"
 cd "$REPO_DIR"
+
+# Kiem tra va tao 2GB Swap de tranh loi Out of Memory khi build
+if [ $(swapon --show | wc -l) -eq 0 ]; then
+    echo -e "\e[33mKhong tim thay Swap. Dang tao 2GB Swap de tranh loi Out of Memory...\e[0m"
+    fallocate -l 2G /swapfile
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab
+fi
+
+export NODE_OPTIONS="--max-old-space-size=4096"
 pnpm --filter @open-design/web build
 
 # ---------------------------------------------------------
