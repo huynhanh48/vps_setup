@@ -18,10 +18,10 @@ echo -e "\e[33m[0/5] Kiem tra va cai dat moi truong (NodeJS, pnpm)...\e[0m"
 
 apt-get update -y -qq && apt-get install -y git openssl curl build-essential -qq
 
-# Cai dat NodeJS (Ban 22.x hoac moi nhat an toan)
+# Cai dat NodeJS (Ban 24.x)
 if ! command -v node &> /dev/null; then
     echo "Dang cai dat NodeJS..."
-    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - > /dev/null 2>&1
+    curl -fsSL https://deb.nodesource.com/setup_24.x | bash - > /dev/null 2>&1
     apt-get install -y nodejs -qq
 fi
 
