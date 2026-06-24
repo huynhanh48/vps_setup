@@ -6,10 +6,10 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-# Kiem tra xem 3 file script con co nam cung thu muc khong
+# Kiem tra xem 5 file script con co nam cung thu muc khong
 check_files() {
     local missing=0
-    for file in run_hermes_agent.sh run_n8n_vps.sh run_openclaw_vps.sh; do
+    for file in run_hermes_agent.sh run_n8n_vps.sh run_openclaw_vps.sh run_9router.sh run_opendesign_vps.sh; do
         if [ ! -f "$file" ]; then
             echo -e "\e[31m[Loi] Khong tim thay file '$file' trong thu muc hien tai!\e[0m"
             missing=1
@@ -18,7 +18,7 @@ check_files() {
         fi
     done
     if [ $missing -eq 1 ]; then
-        echo -e "\e[33mVui long de setup_master.sh cung thu muc voi 3 file tren.\e[0m"
+        echo -e "\e[33mVui long de setup_master.sh cung thu muc voi 5 file tren.\e[0m"
         exit 1
     fi
 }
@@ -32,10 +32,12 @@ show_menu() {
     echo "1. Cai dat Hermes Agent"
     echo "2. Cai dat n8n AI Starter Kit"
     echo "3. Cai dat OpenClaw Gateway"
-    echo "4. Cai dat TAT CA (Deploy tuan tu 3 dich vu)"
+    echo "4. Cai dat 9Router"
+    echo "5. Cai dat OpenDesign"
+    echo "6. Cai dat TAT CA (Deploy tuan tu 5 dich vu)"
     echo "0. Thoat"
     echo -e "\e[36m=================================================\e[0m"
-    read -p "Chon mot tuy chon [0-4]: " choice
+    read -p "Chon mot tuy chon [0-6]: " choice
 
     case $choice in
         1)
@@ -51,15 +53,29 @@ show_menu() {
             ./run_openclaw_vps.sh
             ;;
         4)
+            echo -e "\n\e[32m=> Dang khoi chay cai dat 9Router...\e[0m"
+            ./run_9router.sh
+            ;;
+        5)
+            echo -e "\n\e[32m=> Dang khoi chay cai dat OpenDesign...\e[0m"
+            ./run_opendesign_vps.sh
+            ;;
+        6)
             echo -e "\n\e[32m=> DANG KHOI CHAY CAI DAT TOAN BO HE THONG...\e[0m"
-            echo -e "\e[33m--- 1/3: HERMES AGENT ---\e[0m"
+            echo -e "\e[33m--- 1/5: HERMES AGENT ---\e[0m"
             ./run_hermes_agent.sh
             
-            echo -e "\n\e[33m--- 2/3: N8N AI STARTER ---\e[0m"
+            echo -e "\n\e[33m--- 2/5: N8N AI STARTER ---\e[0m"
             ./run_n8n_vps.sh
             
-            echo -e "\n\e[33m--- 3/3: OPENCLAW GATEWAY ---\e[0m"
+            echo -e "\n\e[33m--- 3/5: OPENCLAW GATEWAY ---\e[0m"
             ./run_openclaw_vps.sh
+            
+            echo -e "\n\e[33m--- 4/5: 9ROUTER ---\e[0m"
+            ./run_9router.sh
+            
+            echo -e "\n\e[33m--- 5/5: OPENDESIGN ---\e[0m"
+            ./run_opendesign_vps.sh
             
             echo -e "\n\e[32m=================================================\e[0m"
             echo -e "\e[32m      DA HOAN TAT CAI DAT TAT CA DICH VU!        \e[0m"
