@@ -16,10 +16,10 @@ echo ""
 # ---------------------------------------------------------
 echo -e "\e[33m[0/4] Kiem tra phu thuoc he thong...\e[0m"
 
-# Cai dat git & openssl neu chua co
-if ! command -v git &> /dev/null || ! command -v openssl &> /dev/null; then
-    echo "Dang cai dat git va openssl..."
-    apt-get update -y -qq && apt-get install -y git openssl -qq
+# Cai dat git, curl & openssl neu chua co
+if ! command -v git &> /dev/null || ! command -v openssl &> /dev/null || ! command -v curl &> /dev/null; then
+    echo "Dang cai dat git, curl va openssl..."
+    apt-get update -y -qq && apt-get install -y git curl openssl -qq
 fi
 
 # Cai dat Docker neu chua co
