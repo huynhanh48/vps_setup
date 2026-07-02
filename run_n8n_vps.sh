@@ -90,6 +90,8 @@ sed -i "s/^N8N_USER_MANAGEMENT_JWT_SECRET=.*/N8N_USER_MANAGEMENT_JWT_SECRET=${N8
 echo "" >> .env
 echo "# Fix for Reverse Proxy HTTP/HTTPS issues" >> .env
 echo "N8N_SECURE_COOKIE=false" >> .env
+echo "WEBHOOK_URL=https://${N8N_DOMAIN}/" >> .env
+echo "N8N_HOST=${N8N_DOMAIN}" >> .env
 
 # ---------------------------------------------------------
 # Buoc 4: Khoi chay bang Docker Compose
